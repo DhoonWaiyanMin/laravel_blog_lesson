@@ -26,6 +26,7 @@
               @csrf
               <div class="d-flex justify-content-between align-items-center">
                 <textarea name="comment" rows="1" style="resize: none; " class="w-75 form-control border-0" placeholder="say something"></textarea>
+                {{-- <input type="text" name="comment" class="form-control w-75 border-0" placeholder="say something..."/> --}}
                 <button class="w-25 btn btn-sm btn-secondary">Send</button>
               </div>
             </form>

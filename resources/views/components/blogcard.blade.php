@@ -1,5 +1,5 @@
   <div class="col-md-4 mb-4">
-    <div class="card">
+    <div class="card h-100">
         @if($blog->thumbnail)
           <img src='{{asset("storage/$blog->thumbnail")}}'' class="card-img-top" alt="...">
         @else 
