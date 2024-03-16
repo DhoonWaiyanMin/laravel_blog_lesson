@@ -49,7 +49,11 @@ class AuthController extends Controller
         ]);
         // dd($formData);
         if(auth()->attempt($formData)){
-            return redirect("/")->with("success","Welcome back");
+            if(auth()->user()->isAdmin){
+                return redirect('admin/blogs')->with('success','Welcome Admin');
+            }else{
+                return redirect("/")->with("success","Welcome back");
+            }
         }else{
             return redirect()->back()->withErrors([
                 "email" => "User credentials wrong"

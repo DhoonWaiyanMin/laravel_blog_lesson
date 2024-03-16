@@ -18,7 +18,7 @@
         <a href="/#blogs" class="nav-link">Blogs</a>
         <a href="#subscribe" class="nav-link">Subscribe</a>
         @if(auth()->user() && auth()->user()->isAdmin)
-          <a href="{{route('blogs.create')}}" class="nav-link">Create Blog</a>
+          <a href="{{route('adminblogs.index')}}" class="nav-link">Admin Dashboard</a>
         @endif
         @auth
           <form action="/logout" method="POST">

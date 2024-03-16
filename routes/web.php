@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
@@ -32,8 +33,10 @@ Route::post('blogs/{blog:slug}/comment',[CommentController::class,'store']);
 Route::post('blogs/{blog:slug}/subscription',[BlogController::class ,"handleSubscribe"]);
 
 // Admin Routes 
-Route::get('admin/blogs/create',[BlogController::class,'create'])->middleware('admin');
-Route::post('admin/blogs/create',[BlogController::class,'store'])->middleware('admin')->name('blogs.create');
+Route::get('admin/blogs',[AdminBlogController::class,'index'])->middleware('admin')->name('adminblogs.index');
+Route::get('admin/blogs/create',[AdminBlogController::class,'create'])->middleware('admin');
+Route::delete('admin/blogs/{blog:slug}',[AdminBlogController::class,'destroy'])->middleware('admin');
+Route::post('admin/blogs/create',[AdminBlogController::class,'store'])->middleware('admin')->name('blogs.create');
 
 // Route::get("users/{user:username}",function(User $user){
 //     return view("blogs",[

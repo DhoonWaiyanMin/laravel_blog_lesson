@@ -23,27 +23,7 @@ class BlogController extends Controller
         ]);
     }
 
-    public function create(){
-        return view('blogs.create',['categories' => Category::all()]);
-    }
-
-    public function store(){
-        
-        $formData = request()->validate([
-            'title' => 'required',
-            'slug' => ['required', Rule::unique('blogs','slug')],
-            'intro' => 'required',
-            'body' => 'required | min : 100',
-            'thumbnail' => 'required | mimes:jpg,jpeg,png',
-            'category_id' => ['required' , Rule::exists('categories','id')]
-        ]);
-        $path = request()->file('thumbnail')->store('thumbnails');
-        $formData['user_id'] = auth()->id();
-        $formData['thumbnail'] = $path;
-        Blog::create($formData);
-
-        return redirect('/');
-    }
+    
 
     public function show(Blog $blog){
         // $blog = Blog::findOrFail($slug);

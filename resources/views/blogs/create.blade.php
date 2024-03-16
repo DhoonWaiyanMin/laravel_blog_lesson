@@ -1,10 +1,9 @@
-<x-layout>
-    <x-slot name="title">Create New Blog</x-slot>
+<x-admin-layout>
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
-                <h3 class="text-center text-primary my-3">Create New Blog</h3>
+            <div class="col-md-12 mx-auto">
+                <h3 class="text-center text-primary my-2">Create New Blog</h3>
                 <div class="card shadow-sm p-4 my-3">
                     <form action="" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -40,4 +39,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-admin-layout>
