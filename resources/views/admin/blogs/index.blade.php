@@ -13,9 +13,9 @@
           @foreach($blogs as $key=>$blog)
             <tr>
                 <th class="px-3">{{$key + $blogs->firstItem()}}</th>
-                <td>{{$blog->title}}</td>
+                <td><a href="/blogs/{{$blog->slug}}" target="_blank">{{$blog->title}}</a></td>
                 <td>{{$blog->intro}}</td>
-                <td><a href="" class="btn btn-primary">Edit</a></td>
+                <td><a href="/admin/blogs/{{$blog->slug}}/edit" class="btn btn-primary">Edit</a></td>
                 <td><form action="/admin/blogs/{{$blog->slug}}" method="POST">
                         @method('DELETE')
                         @csrf

@@ -36,6 +36,31 @@ class AdminBlogController extends Controller
         return redirect('/');
     }
 
+    public function edit(Blog $blog){
+        return view('admin.blogs.edit',[
+            'blog'=>$blog,
+            'categories'=> Category::all()
+        ]);
+    }
+
+    public function update(Blog $blog){
+        $formData = request()->validate([
+            'title' => 'required',
+            'slug' => ['required', Rule::unique('blogs','slug')->ignore($blog->id)],
+            'intro' => 'required',
+            'body' => 'required | min : 100',
+            'thumbnail' => 'mimes:jpg,jpeg,png',
+            'category_id' => ['required' , Rule::exists('categories','id')]
+        ]);
+
+        $formData['thumbnail'] = request()->file('thumbnail') ? request()->file('thumbnail')->store('thumbnails') : $blog->thumbnail;
+        
+        $formData['user_id'] = auth()->id();
+        $blog->update($formData);
+
+        return redirect('/');
+    }
+
     public function destroy(Blog $blog){
         $blog->delete();
         return redirect()->back()->with('success',"Blog Deleted Successfully");

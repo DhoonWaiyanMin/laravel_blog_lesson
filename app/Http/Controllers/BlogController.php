@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class BlogController extends Controller
@@ -17,6 +18,13 @@ class BlogController extends Controller
         // });
         
         // $blogs = Blog::all();
+
+        // when you want to use authorize in controllers 
+
+        // dd(auth()->user()->can('admin')); // return boolean 
+        // dd(Gate::allows('admin'));      // return boolean
+        // dd($this->authorize('admin'));  // if not admin it will return 403 page 
+
         return view("blogs.index",[
             // "blogs" => Blog::with('category','author')->get() // eager load / lazy loading 
             'blogs'=> $this->getBlogs()

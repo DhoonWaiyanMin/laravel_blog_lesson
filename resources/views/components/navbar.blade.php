@@ -17,9 +17,19 @@
         @endguest
         <a href="/#blogs" class="nav-link">Blogs</a>
         <a href="#subscribe" class="nav-link">Subscribe</a>
-        @if(auth()->user() && auth()->user()->isAdmin)
-          <a href="{{route('adminblogs.index')}}" class="nav-link">Admin Dashboard</a>
-        @endif
+
+        {{-- @if(auth()->user() && auth()->user()->isAdmin)
+          <a href="{{route('adminblogs.index')}}" class="nav-link">Dashboard</a>
+        @endif --}}
+
+        {{-- @if(auth()->user()->can('admin'))
+          <a href="{{route('adminblogs.index')}}" class="nav-link">Dashboard</a>
+        @endif --}}
+
+        @can('admin')
+          <a href="{{route('adminblogs.index')}}" class="nav-link">Dashboard</a>
+        @endcan
+
         @auth
           <form action="/logout" method="POST">
             @csrf

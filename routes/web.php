@@ -33,10 +33,37 @@ Route::post('blogs/{blog:slug}/comment',[CommentController::class,'store']);
 Route::post('blogs/{blog:slug}/subscription',[BlogController::class ,"handleSubscribe"]);
 
 // Admin Routes 
-Route::get('admin/blogs',[AdminBlogController::class,'index'])->middleware('admin')->name('adminblogs.index');
-Route::get('admin/blogs/create',[AdminBlogController::class,'create'])->middleware('admin');
-Route::delete('admin/blogs/{blog:slug}',[AdminBlogController::class,'destroy'])->middleware('admin');
-Route::post('admin/blogs/create',[AdminBlogController::class,'store'])->middleware('admin')->name('blogs.create');
+// Route::get('admin/blogs',[AdminBlogController::class,'index'])->middleware('admin')->name('adminblogs.index');
+// Route::get('admin/blogs/create',[AdminBlogController::class,'create'])->middleware('admin');
+// Route::get('admin/blogs/{blog:slug}/edit',[AdminBlogController::class,'edit'])->middleware('admin');
+// Route::patch('admin/blogs/{blog:slug}/update',[AdminBlogController::class,'update'])->middleware('admin');
+// Route::delete('admin/blogs/{blog:slug}',[AdminBlogController::class,'destroy'])->middleware('admin');
+// Route::post('admin/blogs/create',[AdminBlogController::class,'store'])->middleware('admin')->name('blogs.create');
+
+// use authorize gate as a middleware 
+// Route::get('admin/blogs',[AdminBlogController::class,'index'])->middleware('can:admin')->name('adminblogs.index');
+// Route::get('admin/blogs/create',[AdminBlogController::class,'create'])->middleware('can:admin');
+// Route::get('admin/blogs/{blog:slug}/edit',[AdminBlogController::class,'edit'])->middleware('can:admin');
+// Route::patch('admin/blogs/{blog:slug}/update',[AdminBlogController::class,'update'])->middleware('can:admin');
+// Route::delete('admin/blogs/{blog:slug}',[AdminBlogController::class,'destroy'])->middleware('can:admin');
+// Route::post('admin/blogs/create',[AdminBlogController::class,'store'])->middleware('can:admin')->name('blogs.create');
+
+// route group 
+Route::middleware('can:admin')->group(function(){
+    Route::get('admin/blogs',[AdminBlogController::class,'index'])->name('adminblogs.index');
+    Route::get('admin/blogs/create',[AdminBlogController::class,'create']);
+    Route::get('admin/blogs/{blog:slug}/edit',[AdminBlogController::class,'edit']);
+    Route::patch('admin/blogs/{blog:slug}/update',[AdminBlogController::class,'update']);
+    Route::delete('admin/blogs/{blog:slug}',[AdminBlogController::class,'destroy']);
+    Route::post('admin/blogs/create',[AdminBlogController::class,'store'])->name('blogs.create');
+
+});
+
+
+
+
+
+
 
 // Route::get("users/{user:username}",function(User $user){
 //     return view("blogs",[
